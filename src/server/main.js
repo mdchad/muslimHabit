@@ -1,10 +1,13 @@
 const express = require("express");
 const ViteExpress = require("vite-express");
+const path = require('path')
 
 const app = express();
+app.use(ViteExpress.static())
+
 
 app.get("/hello", (req, res) => {
-  res.send("Hello Vite + React!");
+  res.sendFile(path.join(process.cwd(), 'src/app/index.html'))
 });
 
 ViteExpress.listen(app, 3000, () =>
