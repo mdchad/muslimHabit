@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import {Account, Client} from 'appwrite';
 import { v4 as uuidv4 } from 'uuid'
 import "./App.css";
+import {Button} from "@/components/ui/button";
 
 const client = new Client();
 
@@ -36,6 +37,7 @@ function App() {
 
   return (
     <div className="App">
+      <Button>Submit</Button>
     </div>
   );
 }
