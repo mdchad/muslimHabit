@@ -2,8 +2,8 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import {Account, Client} from 'appwrite';
 import { v4 as uuidv4 } from 'uuid'
-import "./App.css";
 import {Button} from "@/components/ui/button";
+import {Link} from "@tanstack/react-router";
 
 const client = new Client();
 
@@ -36,8 +36,12 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Button>Submit</Button>
+    <div className="min-h-screen gap-1 flex flex-col items-center justify-center">
+      <p className="text-3xl">Coming Soon</p>
+      <p className="text-gray-400 mb-8">Muslim Habit</p>
+      <Button className="bg-yellow-400 hover:bg-yellow-600">
+        <Link to="/login">Log In</Link>
+      </Button>
     </div>
   );
 }
