@@ -64,12 +64,12 @@ export function DemoCreateAccount() {
         {/*  </div>*/}
         {/*</div>*/}
         <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" onChange={(e) => handleEmail(e)}/>
+          {/*<Label htmlFor="email">Email</Label>*/}
+          <Input className="placeholder-gray-300 text-md font-normal" id="email" type="email" placeholder="Email" onChange={(e) => handleEmail(e)}/>
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" onChange={(e) => handlePassword(e)}/>
+          {/*<Label htmlFor="password">Password</Label>*/}
+          <Input className="placeholder-gray-300" id="password" type="password" placeholder="Password" onChange={(e) => handlePassword(e)}/>
         </div>
       </CardContent>
       <CardFooter className="py-6 px-0">
