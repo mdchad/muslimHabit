@@ -5,25 +5,8 @@ import { v4 as uuidv4 } from 'uuid'
 import {Button} from "@/components/ui/button";
 import {Link} from "@tanstack/react-router";
 
-const client = new Client();
-
-const account = new Account(client);
-
-client
-  .setEndpoint('https://cloud.appwrite.io/v1')
-  .setProject('65389bd4e61d5ac674fa');
-
 function App() {
   const [count, setCount] = useState(0);
-  const [value, setValue] = useState({})
-
-  function handleEmail(e) {
-    setValue({ ...value, email: e.target.value })
-  }
-
-  function handlePassword(e) {
-    setValue({ ...value, password: e.target.value })
-  }
 
   async function submitForm(e) {
     e.preventDefault()
