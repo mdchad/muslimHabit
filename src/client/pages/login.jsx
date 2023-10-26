@@ -2,14 +2,16 @@ import {Button} from "@/components/ui/button";
 import {Link} from "@tanstack/react-router";
 
 
-export default function Login() {
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { DemoCreateAccount } from "@/components/userForm"
+
+export default function AuthenticationPage() {
   return (
-    <div className="min-h-screen gap-1 flex flex-col items-center justify-center">
-      <p className="text-3xl">Coming Soon</p>
-      <p className="text-gray-400 mb-8">Muslim Habit</p>
-      <Button className="bg-yellow-400 hover:bg-yellow-600">
-        <Link to="/dashboard">Go to Dashboard</Link>
-      </Button>
+    <div className="min-h-screen gap-1 flex flex-col items-center justify-center bg-gradient-to-r from-cyan-100 to-blue-100">
+      <div className="max-w-[400px] w-full">
+        <DemoCreateAccount />
+      </div>
     </div>
   )
 }
