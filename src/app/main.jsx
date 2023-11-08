@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import Login from "../client/pages/login";
+import App from "./app";
+import Login from "./pages/login";
 import "./index.css";
-import {Link, Outlet, redirect, RootRoute, Route, Router, RouterProvider, useNavigate} from "@tanstack/react-router";
+import {Link, Outlet, redirect, RootRoute, Route, Router, RouterProvider } from "@tanstack/react-router";
 import {account} from "@/lib/database";
-import {Button} from "@/components/ui/button";
+import Home from "@/app/pages/home";
+import {Sidebar} from "@/components/sidebar";
 
 const rootRoute = new RootRoute()
 
@@ -59,21 +60,16 @@ const dashboardRootRoute = new Route({
     }
 
     return (
-      <>
-        <div className="p-2 flex gap-2">
-          <Link to="/app/" className="[&.active]:font-bold">
-            Home
-          </Link>{' '}
-          <Link to="/app/about" className="[&.active]:font-bold">
-            About
-          </Link>
-          <Button onClick={handleSignOut}>
-            Log out
-          </Button>
+      <div className="hidden md:block min-h-screen bg-yellow-400">
+        <div className="grid lg:grid-cols-5">
+          <Sidebar className="hidden lg:block" />
+          <div className="col-span-3 lg:col-span-4">
+            <div className="h-full px-4 py-6 lg:px-8">
+              <Outlet />
+            </div>
+          </div>
         </div>
-        <hr />
-        <Outlet />
-      </>
+      </div>
     )
   }
 })
@@ -83,7 +79,7 @@ const homeRoute = new Route({
   path: '/',
   component: () => {
     return (
-     <div>Yoooooo</div>
+      <Home />
     )
   }
 })
