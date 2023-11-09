@@ -22,6 +22,27 @@ import {Input} from "@/components/ui/input";
 export default function Home() {
 
   async function onSubmit() {
+    const mutation = useMutation({
+      onSuccess: () => {
+        // Handle success
+      },
+      onError: () => {
+        // Handle error
+      },
+      onSettled: () => {
+        // Handle completion
+      },
+      mutationFn: (name) => {
+        return fetch('/api/submitName', {
+          method: 'POST',
+          body: JSON.stringify({ name }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then((response) => response.json());
+      },
+    });
+    // Your code here
   }
 
   return (
