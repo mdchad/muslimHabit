@@ -18,32 +18,34 @@ import {Dialog, DialogClose, DialogTrigger} from "@radix-ui/react-dialog";
 import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
+import {useMutation} from "@tanstack/react-query";
+import { ID } from "appwrite";
+import {databases} from "@/lib/database";
+import {useState} from "react";
 
 export default function Home() {
+  const [value, setValue] = useState()
 
-  async function onSubmit() {
-    const mutation = useMutation({
-      onSuccess: () => {
-        // Handle success
-      },
-      onError: () => {
-        // Handle error
-      },
-      onSettled: () => {
-        // Handle completion
-      },
-      mutationFn: (name) => {
-        return fetch('/api/submitName', {
-          method: 'POST',
-          body: JSON.stringify({ name }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }).then((response) => response.json());
-      },
-    });
-    // Your code here
-  }
+  const mutation = useMutation({
+    onSuccess: (data) => {
+      console.log(data)
+      // Handle success
+    },
+    onError: () => {
+      // Handle error
+    },
+    onSettled: () => {
+      // Handle completion
+    },
+    mutationFn: async (data) => {
+      return await databases.createDocument(
+        "654cc8ef00d04f595b07",
+        "654cc905b7688e101eff",
+        ID.unique(),
+        data
+      );
+    },
+  });
 
   return (
     <div className="hidden flex-col md:flex">
@@ -216,12 +218,13 @@ export default function Home() {
                               id="name"
                               placeholder="Solat"
                               className="col-span-3"
+                              onChange={(e) => setValue(e.target.value)}
                             />
                           </div>
                         </div>
                         <DialogFooter>
                           <DialogClose asChild>
-                            <Button type="submit" onClick={onSubmit}>Submit</Button>
+                            <Button type="submit" onClick={() => mutation.mutate({ name: value })}>Submit</Button>
                           </DialogClose>
                         </DialogFooter>
                       </DialogContent>

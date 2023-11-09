@@ -7,7 +7,9 @@ import {Link, Outlet, redirect, RootRoute, Route, Router, RouterProvider } from 
 import {account} from "@/lib/database";
 import Home from "@/app/pages/home";
 import {Sidebar} from "@/components/sidebar";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
+const queryClient = new QueryClient()
 const rootRoute = new RootRoute()
 
 const indexRoute = new Route({
@@ -30,7 +32,6 @@ const dashboardRootRoute = new Route({
     async function isAuthenticated() {
       try {
         const res = await account.getSession('current');
-        console.log(res)
         return res
       } catch (err) {
         console.log(err)
@@ -60,16 +61,18 @@ const dashboardRootRoute = new Route({
     }
 
     return (
-      <div className="hidden md:block min-h-screen bg-yellow-400">
-        <div className="grid lg:grid-cols-5">
-          <Sidebar className="hidden lg:block" />
-          <div className="col-span-3 lg:col-span-4">
-            <div className="h-full px-4 py-6 lg:px-8">
-              <Outlet />
+      <QueryClientProvider client={queryClient}>
+        <div className="hidden md:block min-h-screen bg-yellow-400">
+          <div className="grid lg:grid-cols-5">
+            <Sidebar className="hidden lg:block" />
+            <div className="col-span-3 lg:col-span-4">
+              <div className="h-full px-4 py-6 lg:px-8">
+                <Outlet />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </QueryClientProvider>
     )
   }
 })
