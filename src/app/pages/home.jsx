@@ -195,7 +195,7 @@ export default function Home() {
               {/*</Card>*/}
               <Card className="col-span-3 border-0">
                 <CardHeader>
-                  <CardTitle>Today's habit</CardTitle>
+                  <CardTitle className="font-nanum">Today's habit</CardTitle>
                   <CardDescription className="flex justify-between">
                     Finish your habit!
                     <Dialog>
