@@ -20,6 +20,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        nanum: ['Nanum Pen Script', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
