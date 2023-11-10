@@ -39,9 +39,9 @@ const dashboardRootRoute = new Route({
   component: () => {
     return (
       <QueryClientProvider client={queryClient}>
-        <div className="hidden md:block min-h-screen bg-yellow-400">
+        <div className="md:block min-h-screen bg-yellow-400">
           <div className="grid lg:grid-cols-5">
-            <Sidebar className="hidden lg:block" />
+            <Sidebar className="lg:block" />
             <div className="col-span-3 lg:col-span-4">
               <div className="h-full px-4 py-6 lg:px-8">
                 <Outlet />

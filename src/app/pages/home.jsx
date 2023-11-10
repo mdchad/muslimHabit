@@ -18,17 +18,21 @@ import {Dialog, DialogClose, DialogTrigger} from "@radix-ui/react-dialog";
 import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import { ID } from "appwrite";
 import {databases} from "@/lib/database";
 import {useState} from "react";
 
+
 export default function Home() {
+  const queryClient = useQueryClient()
   const [value, setValue] = useState()
 
   const mutation = useMutation({
-    onSuccess: (data) => {
-      console.log(data)
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: ['habits'],
+      })
       // Handle success
     },
     onError: () => {
@@ -48,7 +52,7 @@ export default function Home() {
   });
 
   return (
-    <div className="hidden flex-col md:flex">
+    <div className="flex-col md:flex">
       {/*<div className="border-b">*/}
       {/*  <div className="flex h-16 items-center px-4">*/}
       {/*    <TeamSwitcher />*/}
