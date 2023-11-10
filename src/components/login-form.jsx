@@ -13,7 +13,7 @@ import {useState} from "react";
 import {account} from "@/lib/database";
 import {useNavigate} from "@tanstack/react-router";
 
-export function DemoCreateAccount() {
+export function LoginForm() {
   const navigate = useNavigate()
   const [value, setValue] = useState({})
 
