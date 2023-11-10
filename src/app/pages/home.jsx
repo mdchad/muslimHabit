@@ -18,35 +18,41 @@ import {Dialog, DialogClose, DialogTrigger} from "@radix-ui/react-dialog";
 import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import { ID } from "appwrite";
+import {databases} from "@/lib/database";
+import {useState} from "react";
+
 
 export default function Home() {
+  const queryClient = useQueryClient()
+  const [value, setValue] = useState()
 
-  async function onSubmit() {
-    const mutation = useMutation({
-      onSuccess: () => {
-        // Handle success
-      },
-      onError: () => {
-        // Handle error
-      },
-      onSettled: () => {
-        // Handle completion
-      },
-      mutationFn: (name) => {
-        return fetch('/api/submitName', {
-          method: 'POST',
-          body: JSON.stringify({ name }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }).then((response) => response.json());
-      },
-    });
-    // Your code here
-  }
+  const mutation = useMutation({
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: ['habits'],
+      })
+      // Handle success
+    },
+    onError: () => {
+      // Handle error
+    },
+    onSettled: () => {
+      // Handle completion
+    },
+    mutationFn: async (data) => {
+      return await databases.createDocument(
+        "654cc8ef00d04f595b07",
+        "654cc905b7688e101eff",
+        ID.unique(),
+        data
+      );
+    },
+  });
 
   return (
-    <div className="hidden flex-col md:flex">
+    <div className="flex-col md:flex">
       {/*<div className="border-b">*/}
       {/*  <div className="flex h-16 items-center px-4">*/}
       {/*    <TeamSwitcher />*/}
@@ -85,18 +91,6 @@ export default function Home() {
                   <CardTitle className="text-sm font-medium">
                     Total Streak
                   </CardTitle>
-                  {/*<svg*/}
-                  {/*  xmlns="http://www.w3.org/2000/svg"*/}
-                  {/*  viewBox="0 0 24 24"*/}
-                  {/*  fill="none"*/}
-                  {/*  stroke="currentColor"*/}
-                  {/*  strokeLinecap="round"*/}
-                  {/*  strokeLinejoin="round"*/}
-                  {/*  strokeWidth="2"*/}
-                  {/*  className="h-4 w-4 text-muted-foreground"*/}
-                  {/*>*/}
-                  {/*  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />*/}
-                  {/*</svg>*/}
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">7 days</div>
@@ -193,7 +187,7 @@ export default function Home() {
               {/*</Card>*/}
               <Card className="col-span-3 border-0">
                 <CardHeader>
-                  <CardTitle>Today's habit</CardTitle>
+                  <CardTitle className="font-nanum text-3xl">Today's habit</CardTitle>
                   <CardDescription className="flex justify-between">
                     Finish your habit!
                     <Dialog>
@@ -216,12 +210,13 @@ export default function Home() {
                               id="name"
                               placeholder="Solat"
                               className="col-span-3"
+                              onChange={(e) => setValue(e.target.value)}
                             />
                           </div>
                         </div>
                         <DialogFooter>
                           <DialogClose asChild>
-                            <Button type="submit" onClick={onSubmit}>Submit</Button>
+                            <Button type="submit" onClick={() => mutation.mutate({ name: value })}>Submit</Button>
                           </DialogClose>
                         </DialogFooter>
                       </DialogContent>
