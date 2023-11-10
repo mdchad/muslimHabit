@@ -20,7 +20,9 @@ export function HabitSheet({ useRouteContext }) {
 
   async function onChange(s) {
     if (s === false) {
-      await navigate({ to: '/app' })
+      setTimeout(async () => {
+        await navigate({ to: '/app' })
+      }, 400)
     }
   }
 
