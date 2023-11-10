@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Sheet,
   SheetClose,
@@ -8,11 +8,10 @@ import {
   SheetDescription,
   SheetFooter,
   SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-import {Link, useNavigate} from "@tanstack/react-router";
-import {useQuery} from "@tanstack/react-query";
+  SheetTitle
+} from '@/components/ui/sheet'
+import { useNavigate } from '@tanstack/react-router'
+import { useQuery } from '@tanstack/react-query'
 
 export function HabitSheet({ useRouteContext }) {
   const navigate = useNavigate({ from: '/app' })
