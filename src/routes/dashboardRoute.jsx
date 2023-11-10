@@ -5,6 +5,8 @@ import {Sidebar} from "@/components/sidebar";
 import Home from "@/app/pages/home";
 import React from "react";
 import {rootRoute, router} from "@/app/main";
+import Template from "@/app/pages/template";
+import Learn from "@/app/pages/learn";
 
 const queryClient = new QueryClient()
 
@@ -62,6 +64,26 @@ export const homeRoute = new Route({
   }
 })
 
-dashboardRootRoute.addChildren([homeRoute])
+export const templateRoute = new Route({
+  getParentRoute: () => dashboardRootRoute,
+  path: '/template',
+  component: () => {
+    return (
+      <Template />
+    )
+  }
+})
+
+export const learningRoute = new Route({
+  getParentRoute: () => dashboardRootRoute,
+  path: '/learn',
+  component: () => {
+    return (
+      <Learn />
+    )
+  }
+})
+
+dashboardRootRoute.addChildren([homeRoute, templateRoute, learningRoute])
 
 export { dashboardRootRoute }
